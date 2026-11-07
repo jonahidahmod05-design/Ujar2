@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDT333.COM - প্ল্যাটফর্ম</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #0f0f0f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .user-container {
+      width: 100%;
+      max-width: 480px;
+      height: 100vh;
+      background: #141414;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-y: auto;
+      color: #ffffff;
+      padding: 12px 12px 30px 12px;
+    }
+
+    /* ফ্লটিং হোয়াইট কার্ড (মেম্বার সেন্টার হেডার) */
+    .profile-card-top {
+      background: linear-gradient(135deg, #ffffff 0%, #e8edf2 100%);
+      color: #111111;
+      border-radius: 20px;
+      padding: 18px 16px;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      margin-top: 5px;
+      overflow: hidden;
+    }
+
+    .top-signin-btn {
+      position: absolute;
+      top: 15px;
+      right: 0;
+      background: linear-gradient(90deg, #e53935, #d32f2f);
+      color: #ffffff;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: bold;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .profile-info-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 5px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      overflow: hidden;
+      background: #ccc;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .vip-badge {
+      background: #4a4a4a;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 12px;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .user-phone-text {
+      font-size: 16px;
+      font-weight: 800;
+      color: #111111;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nickname-row {
+      font-size: 11px;
+      color: #555555;
+    }
+
+    .join-date-row {
+      font-size: 10px;
+      color: #777777;
+    }
+
+    .balance-box-row {
+      margin-top: 18px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 6px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .balance-amount {
+      font-size: 22px;
+      font-weight: 800;
+      color: #222222;
+    }
+
+    .refresh-btn {
+      background: transparent;
+      border: none;
+      color: #777777;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .main-action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .action-btn-item {
+      flex: 1;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      color: #222222;
+      padding: 10px 4px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+    }
+
+    .section-title-bar {
+      padding: 18px 8px 10px 8px;
+      font-size: 12px;
+      color: #888888;
+      font-weight: 600;
+    }
+
+    .menu-grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px 8px;
+      padding: 0 4px;
+    }
+
+    .menu-grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .menu-icon-circle {
+      width: 52px;
+      height: 52px;
+      background: #222222;
+      border: 1px solid #333333;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d4af37;
+      font-size: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    .menu-item-label {
+      font-size: 11px;
+      color: #bbbbbb;
+      text-align: center;
+    }
+
+    .notif-badge {
+      position: absolute;
+      top: -2px;
+      right: 6px;
+      background: #e53935;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: bold;
+      padding: 1px 5px;
+      border-radius: 10px;
+    }
+
+    /* ফিক্সড ফুল-স্ক্রিন পেজ স্টাইল */
+    #my-cards-page, #withdraw-page, #deposit-page, #deposit-next-page {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #f2f2f5;
+      z-index: 99999;
+      flex-direction: column;
+      color: #111;
+      overflow-y: auto;
+    }
+
+    .cards-top-header {
+      background-color: #141414;
+      color: #ffffff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: bold;
+      flex-shrink: 0;
+      border-bottom: 1px solid #222;
+    }
+    .cards-top-header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .cards-top-header i {
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .cards-content-area {
+      padding: 14px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      padding-bottom: 90px;
+    }
+
+    .deposit-section-title {
+      font-size: 13px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .deposit-section-title::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 12px;
+      background: #e53935;
+      border-radius: 2px;
+    }
+
+    /* ৬টি মোড বক্স */
+    .deposit-grid-box-6 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .deposit-item-card {
+      background: #ffffff;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .deposit-item-card.active {
+      border-color: #e53935;
+      background: #fff5f5;
+    }
+    .deposit-item-card .thumb-img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      background: #f0f0f0;
+      border-radius: 6px;
+    }
+    .deposit-item-card span {
+      font-size: 11px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+    }
+
+    /* পেমেন্ট চ্যানেল হরিজন্টাল স্ক্রোল বক্স */
+    .payment-channel-scroll-container {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      grid-auto-flow: column;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      scroll-snap-type: x mandatory;
+    }
+    .payment-channel-scroll-container::-webkit-scrollbar {
+      height: 5px;
+    }
+    .payment-channel-scroll-container::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+
+    .channel-small-card {
+      min-width: 100px;
+      height: 40px;
+      background: #ffffff;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      scroll-snap-align: start;
+    }
+    .channel-small-card.active {
+      border-color: #e53935;
+      color: #e53935;
+      background: #fff5f5;
+    }
+
+    .wallet-top-notice-box {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #333333;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .wallet-top-notice-box span.limit-badge {
+      color: #d4af37;
+      background: #222;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+    }
+
+    .wallet-card-item {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-left: 5px solid #064e3b;
+    }
+    .wallet-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .wallet-type {
+      font-size: 15px;
+      font-weight: bold;
+      color: #222222;
+    }
+    .wallet-number {
+      font-size: 13px;
+      color: #666666;
+      letter-spacing: 1px;
+    }
+    .wallet-date {
+      font-size: 10px;
+      color: #999999;
+      text-align: right;
+    }
+
+    .fab-add-btn {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 54px;
+      height: 54px;
+      background: #e53935;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
+      cursor: pointer;
+      z-index: 220;
+    }
+    .fab-add-btn.disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .bottom-popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100000;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .bottom-popup-overlay.active {
+      display: flex;
+    }
+
+    .bottom-popup-box {
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      padding: 20px 16px 25px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .popup-title {
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .popup-option-item {
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+    }
+    .popup-option-item i {
+      color: #e53935;
+      font-size: 18px;
+    }
+
+    #bind-wallet-page {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #f2f2f5;
+      z-index: 100001;
+      flex-direction: column;
+      color: #111;
+      overflow-y: auto;
+    }
+
+    .form-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .form-group-title {
+      font-size: 13px;
+      color: #555;
+      font-weight: bold;
+    }
+    .wallet-type-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .wallet-type-option {
+      background: #ffffff;
+      border: 1.5px solid #dcdcdc;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .wallet-type-option.selected {
+      border-color: #e53935;
+      color: #e53935;
+      background: #fff5f5;
+    }
+    .input-field-box {
+      background: #ffffff;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+    .input-field-box input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      background: transparent;
+    }
+    
+    .toggle-password {
+      cursor: pointer;
+      color: #888888;
+      font-size: 16px;
+      padding: 0 4px;
+    }
+
+    .submit-bind-btn {
+      background: #cccccc;
+      color: #666666;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: not-allowed;
+      transition: background 0.3s;
+    }
+    .submit-bind-btn.active {
+      background: #064e3b;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .form-footer-notice {
+      margin-top: 18px;
+      padding: 12px;
+      background: rgba(6, 78, 59, 0.08);
+      border-left: 4px solid #064e3b;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #444444;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .withdraw-content-area {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-bottom: 40px;
+    }
+
+    .bound-wallet-section {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    .bound-wallet-title {
+      font-size: 13px;
+      color: #555;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .withdraw-wallet-scroll-box {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scroll-snap-type: x mandatory;
+    }
+    .withdraw-wallet-scroll-box::-webkit-scrollbar {
+      height: 4px;
+    }
+    .withdraw-wallet-scroll-box::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+
+    .selected-wallet-card {
+      min-width: 240px;
+      flex: 0 0 auto;
+      background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(0,114,255,0.2);
+      cursor: pointer;
+      position: relative;
+      border: 3px solid transparent;
+      scroll-snap-align: start;
+    }
+    .selected-wallet-card.active-selected {
+      border-color: #ffd700;
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+    }
+    .selected-wallet-card .w-type {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .selected-wallet-card .w-num {
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+    .selected-wallet-card .w-date {
+      font-size: 10px;
+      color: rgba(255,255,255,0.8);
+      text-align: right;
+    }
+
+    .withdraw-add-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #e53935;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(229,57,53,0.4);
+    }
+
+    .withdraw-info-box {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: #666;
+      border: 1px solid #e0e0e0;
+    }
+    .withdraw-info-box b {
+      color: #111;
+    }
+
+    .refresh-balance-pill {
+      background: #dbeafe;
+      color: #1e40af;
+      border: none;
+      padding: 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .withdraw-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .withdraw-form-group label {
+      font-size: 13px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .withdraw-submit-btn {
+      background: #cccccc;
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: not-allowed;
+      text-align: center;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    .withdraw-submit-btn.active-btn {
+      background: #064e3b;
+      cursor: pointer;
+    }
+
+    /* নিচের চিকন পপ-আপ বক্স স্টাইল */
+    .thin-bottom-popup {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      background: #ffffff;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      padding: 14px 16px;
+      z-index: 100002;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
+      flex-direction: column;
+      gap: 10px;
+      color: #333;
+    }
+    .thin-bottom-popup.active {
+      display: flex;
+    }
+    .thin-popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: bold;
+      color: #222;
+    }
+    .thin-popup-close {
+      cursor: pointer;
+      font-size: 16px;
+      color: #666;
+    }
+    .thin-popup-btn {
+      background: #064e3b;
+      color: #ffffff;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="user-container" id="member-center-container">
+
+    <!-- ফ্লটিং হোয়াইট কার্ড -->
+    <div class="profile-card-top">
+      <div class="top-signin-btn" id="signin-btn">
+        <i class="fa-solid fa-calendar-check"></i> সাইন ইন <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
+      </div>
+
+      <div class="profile-info-row">
+        <div class="avatar-wrapper">
+          <img src="https://i.postimg.cc/jdvdM8F1/file-0000000077f48211ae5c38cf077f8157.png" alt="Avatar">
+        </div>
+        <div class="user-details">
+          <div class="vip-badge"><i class="fa-solid fa-shield-cat"></i> VIP3</div>
+          <div class="user-phone-text">
+            <span id="display-user-phone">লোড হচ্ছে...</span>
+          </div>
+          <div class="nickname-row">
+            ডাকনাম: <span id="display-nickname">---</span>
+          </div>
+          <div class="join-date-row">
+            যোগদান করেছেন: 2026-05-31
+          </div>
+        </div>
+      </div>
+
+      <!-- লাইভ ব্যালেন্স -->
+      <div class="balance-box-row">
+        <div class="balance-amount" id="user-balance-text">৳ 0.00</div>
+        <button class="refresh-btn" id="refresh-balance-btn" title="রিফ্রেশ">
+          <i class="fa-solid fa-rotate"></i>
+        </button>
+      </div>
+
+      <!-- ৩টি প্রধান ক্যাপসুল বাটন -->
+      <div class="main-action-buttons">
+        <div class="action-btn-item" id="btn-deposit">জমা দিন</div>
+        <div class="action-btn-item" id="btn-withdraw-click">উত্তোলন</div>
+        <div class="action-btn-item" id="open-cards-page-btn">আমার কার্ড</div>
+      </div>
+    </div>
+
+    <!-- সদস্য সেন্টার সেকশন টাইটেল -->
+    <div class="section-title-bar">সদস্য সেন্টার</div>
+
+    <!-- ১৬টি ফিচার বাটন গ্রিড (কাস্টমার কেয়ার সহ) -->
+    <div class="menu-grid-container" id="feature-grid-container">
+      <div class="menu-grid-item" data-config-key="reward_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-trophy"></i></div>
+        <span class="menu-item-label">আমার পুরস্কার</span>
+        <span class="notif-badge">4</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="bet_history_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-chart-line"></i></div>
+        <span class="menu-item-label">বাজির ইতিহাস</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="profit_loss_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+        <span class="menu-item-label">লাভ এবং লস</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="deposit_record_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-file-arrow-down"></i></div>
+        <span class="menu-item-label">জমা রেকর্ড</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="withdraw_record_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-file-arrow-up"></i></div>
+        <span class="menu-item-label">উত্তোলন রেকর্ড</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="transaction_history_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <span class="menu-item-label">লেনদেনের ইতিহাস</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="my_account_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-user-gear"></i></div>
+        <span class="menu-item-label">আমার অ্যাকাউন্ট</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="security_center_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
+        <span class="menu-item-label">সুরক্ষা কেন্দ্র</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="invite_friends_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-user-plus"></i></div>
+        <span class="menu-item-label">বন্ধুদের আমন্ত্রণ</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="mission_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-gift"></i></div>
+        <span class="menu-item-label">মিশন</span>
+        <span class="notif-badge">1</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="rebate_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-percent"></i></div>
+        <span class="menu-item-label">রিবেট</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="mail_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-envelope"></i></div>
+        <span class="menu-item-label">মেইল</span>
+        <span class="notif-badge">95</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="consultation_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-comments"></i></div>
+        <span class="menu-item-label">পরামর্শ</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="customer_care_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-headset"></i></div>
+        <span class="menu-item-label">কাস্টমার কেয়ার</span>
+      </div>
+      <div class="menu-grid-item" data-config-key="help_center_link">
+        <div class="menu-icon-circle"><i class="fa-solid fa-circle-question"></i></div>
+        <span class="menu-item-label">সাহায্য কেন্দ্র</span>
+      </div>
+      <div class="menu-grid-item" id="menu-logout">
+        <div class="menu-icon-circle"><i class="fa-solid fa-right-from-bracket" style="color: #ff6b6b;"></i></div>
+        <span class="menu-item-label">লগআউট</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- "ডিপোজিট" পেজ ১ -->
+  <!-- ========================================== -->
+  <div id="deposit-page">
+    <div class="cards-top-header">
+      <div class="cards-top-header-left">
+        <i class="fa-solid fa-chevron-left" id="close-deposit-page"></i>
+        <span>জমা দিন</span>
+      </div>
+      <i class="fa-solid fa-file-lines" style="font-size: 20px; cursor: pointer;"></i>
+    </div>
+
+    <div class="withdraw-content-area">
+      <!-- আমানতের মোড -->
+      <div class="deposit-section-title">আমানতের মোড</div>
+      <div class="deposit-grid-box-6" id="deposit-mode-container">
+        <div class="deposit-item-card" data-mode="Bkash Send Money" data-key="bkash_send" data-logo="https://i.postimg.cc/rFcG70JF/b-Kash-Logo.png">
+          <img src="https://i.postimg.cc/rFcG70JF/b-Kash-Logo.png" alt="Bkash Send Money" class="thumb-img">
+          <span>বিকাশ সেন্ড মানি</span>
+        </div>
+        <div class="deposit-item-card" data-mode="Bkash Cash Out" data-key="bkash_cashout" data-logo="https://i.postimg.cc/rFcG70JF/b-Kash-Logo.png">
+          <img src="https://i.postimg.cc/rFcG70JF/b-Kash-Logo.png" alt="Bkash Cash Out" class="thumb-img">
+          <span>বিকাশ ক্যাশ আউট</span>
+        </div>
+        <div class="deposit-item-card" data-mode="Nagad Send Money" data-key="nagad_send" data-logo="https://i.postimg.cc/VvT7PZS4/IMG-20261022-082439.png">
+          <img src="https://i.postimg.cc/VvT7PZS4/IMG-20261022-082439.png" alt="Nagad Send Money" class="thumb-img">
+          <span>নগদ সেন্ড মানি</span>
+        </div>
+        <div class="deposit-item-card" data-mode="Nagad Cash Out" data-key="nagad_cashout" data-logo="https://i.postimg.cc/VvT7PZS4/IMG-20261022-082439.png">
+          <img src="https://i.postimg.cc/VvT7PZS4/IMG-20261022-082439.png" alt="Nagad Cash Out" class="thumb-img">
+          <span>নগদ ক্যাশ আউট</span>
+        </div>
+        <div class="deposit-item-card" data-mode="Rocket Send Money" data-key="rocket_send" data-logo="https://i.postimg.cc/3JwC8PPx/IMG-20261022-082623.png">
+          <img src="https://i.postimg.cc/3JwC8PPx/IMG-20261022-082623.png" alt="Rocket Send Money" class="thumb-img">
+          <span>রকেট সেন্ড মানি</span>
+        </div>
+        <div class="deposit-item-card" data-mode="Rocket Cash Out" data-key="rocket_cashout" data-logo="https://i.postimg.cc/3JwC8PPx/IMG-20261022-082623.png">
+          <img src="https://i.postimg.cc/3JwC8PPx/IMG-20261022-082623.png" alt="Rocket Cash Out" class="thumb-img">
+          <span>রকেট ক্যাশ আউট</span>
+        </div>
+      </div>
+
+      <!-- পেমেন্ট চ্যানেল -->
+      <div class="deposit-section-title">পেমেন্ট চ্যানেল</div>
+      <div class="payment-channel-scroll-container" id="payment-channel-container">
+        <!-- জাভাস্ক্রিপ্ট দিয়ে ১৮টি বক্স ডাইনামিকলি তৈরি হবে -->
+      </div>
+
+      <!-- জমা পরিমাণ -->
+      <div class="deposit-section-title">জমা পরিমাণ</div>
+      <div class="withdraw-form-group">
+        <div class="input-field-box">
+          <input type="number" id="deposit-amount-input" placeholder="পরিমাণ লিখুন" oninput="checkDepositForm()">
+        </div>
+        <span style="font-size: 11px; color: #666; margin-top: 4px;">সর্বনিম্ন 100 সর্বোচ্চ ৳50000 ডিপোজিট করতে পারবেন</span>
+      </div>
+
+      <!-- পরবর্তী বাটন -->
+      <button class="withdraw-submit-btn" id="next-deposit-btn" disabled style="margin-top: 15px;">পরবর্তী</button>
+    </div>
+
+    <!-- স্ক্রিনের নিচে চিকন পপ-আপ বক্স -->
+    <div class="thin-bottom-popup" id="thin-popup-box">
+      <div class="thin-popup-header">
+        <span>পরবর্তী পেজ ওপেন করুন, জমা দেওয়ার পৃষ্ঠা ব্যবহার করুন</span>
+        <i class="fa-solid fa-xmark thin-popup-close" id="close-thin-popup"></i>
+      </div>
+      <button class="thin-popup-btn" id="open-next-page-btn">পরবর্তী পেজে যান</button>
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- "ডিপোজিট পরবর্তী পেজ" -->
+  <!-- ========================================== -->
+  <div id="deposit-next-page" style="background: #ffffff; color: #111;">
+    <div style="background: #064e3b; color: #ffffff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; font-weight: bold;">
+      <span id="header-amount-disp">BDT 300.00</span>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="background: #ffffff; color: #064e3b; padding: 2px 8px; border-radius: 4px; font-size: 11px;">PAY SERVICE</span>
+        <span style="font-size: 11px; border: 1px solid #fff; padding: 1px 4px; border-radius: 3px;">EN বাং</span>
+      </div>
+      <i class="fa-solid fa-xmark" id="close-deposit-next-page" style="cursor: pointer; font-size: 18px; background: #000; padding: 4px 8px; border-radius: 50%;"></i>
+    </div>
+
+    <div class="withdraw-content-area" style="gap: 14px; background: #f9f9f9; flex-grow: 1;">
+      <div style="font-size: 13px; font-weight: bold; color: #064e3b;">
+        কম বা বেশি ক্যাশআউট করবেন না
+      </div>
+
+      <div style="background: #ffebee; border: 1px solid #ffcdd2; color: #c62828; padding: 12px; border-radius: 6px; font-size: 12px; font-weight: bold; line-height: 1.5;">
+        আপনি যদি টাকার পরিমাণ পরিবর্তন করেন (<span id="warn-amount-disp">BDT 300.00</span>), আপনি ক্রেডিট পেতে সক্ষম হবেন না।
+      </div>
+
+      <div style="background: #ff5252; color: #ffffff; padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(255,82,82,0.3);">
+        <img src="" id="next-page-logo" alt="Logo" style="width: 36px; height: 36px; object-fit: contain; background: #fff; border-radius: 50%; padding: 3px;">
+        <span style="font-size: 16px; font-weight: bold;" id="next-page-mode-title">NAGAD Deposit</span>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: bold; color: #333; margin-bottom: 4px;">Wallet No*</div>
+        <div style="font-size: 11px; color: #e53935; font-weight: bold; margin-bottom: 8px;" id="wallet-instruction-text">এই নম্বরে শুধু সেন্ড মানি গ্রহণ করা হয়</div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <span style="font-size: 16px; font-weight: bold; color: #111; letter-spacing: 1px;" id="admin-wallet-number">00</span>
+          <i class="fa-regular fa-copy" id="copy-wallet-btn" style="color: #064e3b; font-size: 20px; cursor: pointer;" title="কপি করুন"></i>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: bold; color: #333; margin-bottom: 2px;">ক্যাশআউটের TrxID নাম্বারটি লিখুন *</div>
+        <div style="font-size: 11px; color: #e53935; font-weight: bold; margin-bottom: 6px;">(প্রয়োজন)</div>
+        <div style="font-size: 12px; color: #1e88e5; margin-bottom: 8px; cursor: pointer; text-decoration: underline;">কিভাবে TrxID পেতে হয় তা দেখতে ক্লিক করুন</div>
+        
+        <div class="input-field-box" style="background: #fff; border: 1px solid #ff5252; border-radius: 6px;">
+          <input type="text" id="deposit-trxid" placeholder="TrxID অবশ্যই পূরণ করতে হবে!" style="font-size: 13px;">
+        </div>
+      </div>
+
+      <!-- নিশ্চিত বাটন -->
+      <button class="withdraw-submit-btn active-btn" id="confirm-deposit-btn" style="background: #ffffff; color: #111; border: 1.5px solid #333; border-radius: 8px; font-weight: bold; margin-top: 10px;">নিশ্চিত</button>
+
+      <div style="margin-top: 15px; font-size: 11px; color: #c62828; line-height: 1.6;">
+        <b>সতর্কতাঃ</b><br>
+        লেনদেন আইডি সঠিকভাবে পূরণ করতে হবে, অন্যথায় স্কোর ব্যর্থ হবে !!<br>
+        অনুগ্রহ করে নিশ্চিত হয়ে নিন যে আপনি সঠিক ওয়ালেট নম্বরে টাকা পাঠিয়েছেন।
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- "উত্তোলন" পেজ (ফুল স্ক্রিন) -->
+  <!-- ========================================== -->
+  <div id="withdraw-page">
+    <div class="cards-top-header">
+      <div class="cards-top-header-left">
+        <i class="fa-solid fa-chevron-left" id="close-withdraw-page"></i>
+        <span>উত্তোলন</span>
+      </div>
+      <i class="fa-solid fa-file-lines" style="font-size: 20px; cursor: pointer;" title="উত্তোলন রেকর্ড"></i>
+    </div>
+
+    <div class="withdraw-content-area">
+      <div class="withdraw-top-banner" style="background: #ffffff; padding: 10px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #e0e0e0; border-radius: 8px;">
+        <i class="fa-solid fa-wallet" style="color: #e53935;"></i>
+        <span style="background: #e53935; color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">E wallet</span>
+      </div>
+
+      <div class="bound-wallet-section">
+        <div class="bound-wallet-title" id="withdraw-wallet-count-label">আবদ্ধ E wallet (0/5)</div>
+        
+        <div class="withdraw-wallet-scroll-box" id="withdraw-wallet-card-container">
+          <div style="font-size: 13px; color: #888; padding: 10px 0;">কোনো ওয়ালেট যুক্ত করা হয়নি!</div>
+        </div>
+
+        <div class="withdraw-add-btn" id="withdraw-open-add-popup">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+      </div>
+
+      <div class="withdraw-info-box">
+        <div>উত্তোলন সময়: <b>২৪ ঘণ্টা</b></div>
+        <div>প্রধান ওয়ালেট: <b id="main-wallet-disp">৳ 0.00</b></div>
+        <div>উপলব্ধ পরিমাণ: <b id="available-amount-disp">৳ 0.00</b></div>
+      </div>
+
+      <button class="refresh-balance-pill" id="withdraw-refresh-btn">
+        <i class="fa-solid fa-rotate"></i> আপনার ব্যালেন্স রিফ্রেশ করুন
+      </button>
+
+      <div class="withdraw-form-group">
+        <label id="withdraw-amount-label">উত্তোলন পরিমাণ:</label>
+        <div class="input-field-box">
+          <input type="text" id="withdraw-amount-input" placeholder="পরিমাণ 100 ~ 25,000">
+        </div>
+      </div>
+
+      <div class="withdraw-form-group">
+        <label id="withdraw-pin-label">লেনদেন পাসওয়ার্ড:</label>
+        <div class="input-field-box">
+          <input type="password" id="withdraw-pin-input" placeholder="লেনদেন পাসওয়ার্ড">
+          <i class="fa-solid fa-eye-slash toggle-password" id="toggle-withdraw-pin"></i>
+        </div>
+      </div>
+
+      <button class="withdraw-submit-btn" id="confirm-withdraw-btn" style="background: #064e3b; cursor: pointer;">জমা দিন</button>
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- "আমার কার্ড" পেজ -->
+  <!-- ========================================== -->
+  <div id="my-cards-page">
+    <div class="cards-top-header">
+      <div class="cards-top-header-left">
+        <i class="fa-solid fa-chevron-left" id="close-cards-page"></i>
+        <span>আমার কার্ড</span>
+      </div>
+    </div>
+
+    <div class="cards-content-area">
+      <div class="wallet-top-notice-box">
+        <span><i class="fa-solid fa-wallet" style="color: #064e3b; margin-right: 6px;"></i> ওয়ালেট যুক্ত করুন (সর্বোচ্চ ৫টি)</span>
+        <span class="limit-badge" id="wallet-limit-counter">0/5</span>
+      </div>
+
+      <div class="wallet-count-text" id="wallet-count-label">ই-ওয়ালেট যোগ করা হয়েছে: 0</div>
+      
+      <div id="wallets-list-container">
+        <div style="text-align: center; color: #888; margin-top: 40px; font-size: 13px;">কোনো ই-ওয়ালেট যুক্ত করা হয়নি!</div>
+      </div>
+    </div>
+
+    <div class="fab-add-btn" id="open-popup-btn">
+      <i class="fa-solid fa-plus"></i>
+    </div>
+
+    <div class="bottom-popup-overlay" id="bottom-popup-overlay">
+      <div class="bottom-popup-box">
+        <div class="popup-title">নতুন যোগ করুন</div>
+        <div class="popup-option-item" id="select-ewallet-btn">
+          <i class="fa-solid fa-wallet"></i>
+          <span>E wallet</span>
+        </div>
+        <div style="text-align: center; margin-top: 5px;">
+          <i class="fa-solid fa-xmark" id="close-bottom-popup" style="font-size: 20px; color: #666; cursor: pointer;"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="bind-wallet-page">
+      <div class="cards-top-header">
+        <div class="cards-top-header-left">
+          <i class="fa-solid fa-chevron-left" id="close-bind-page"></i>
+          <span>ই-ওয়ালেট বাঁধন</span>
+        </div>
+      </div>
+
+      <div class="form-body">
+        <div class="form-group-title">ই-ওয়ালেট গ্রুপ নির্বাচন করুন</div>
+        
+        <div class="wallet-type-grid">
+          <div class="wallet-type-option selected" data-type="Nagad">Nagad</div>
+          <div class="wallet-type-option" data-type="BKash">BKash</div>
+          <div class="wallet-type-option" data-type="Rocket">Rocket</div>
+        </div>
+
+        <div class="input-field-box">
+          <i class="fa-solid fa-user" style="color: #888;"></i>
+          <input type="text" id="wallet-holder-name" placeholder="আপনার আসল নাম" oninput="checkFormCompletion()">
+        </div>
+
+        <div class="input-field-box">
+          <i class="fa-solid fa-mobile-screen" style="color: #888;"></i>
+          <input type="tel" id="wallet-account-number" placeholder="আপনার অ্যাকাউন্ট নম্বর" oninput="checkFormCompletion()">
+        </div>
+
+        <div class="input-field-box">
+          <i class="fa-solid fa-lock" style="color: #888;"></i>
+          <input type="password" id="wallet-pin" placeholder="পাসওয়ার্ড" oninput="checkFormCompletion()">
+          <i class="fa-solid fa-eye-slash toggle-password" id="toggle-pin"></i>
+        </div>
+
+        <div class="input-field-box">
+          <i class="fa-solid fa-lock" style="color: #888;"></i>
+          <input type="password" id="wallet-confirm-pin" placeholder="কনফার্ম পাসওয়ার্ড" oninput="checkFormCompletion()">
+          <i class="fa-solid fa-eye-slash toggle-password" id="toggle-confirm-pin"></i>
+        </div>
+
+        <button class="submit-bind-btn" id="submit-wallet-btn" disabled>OK</button>
+
+        <div class="form-footer-notice">
+          প্রিয় গ্রাহক<br>
+          সঠিক ওয়ালেট যুক্ত করে নাম্বার সেভ করুন<br>
+          না হয় আপনার পেমেন্ট বাতিল হতে পারে<br>
+          আমাদের অনলাইন সেবায় আপনাকে স্বাগতম
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC0oyxmcovJ2HeCIrH-5ycLyeNV-Eb4AJU",
+      authDomain: "facebook-boost-and-post.firebaseapp.com",
+      projectId: "facebook-boost-and-post",
+      storageBucket: "facebook-boost-and-post.firebasestorage.app",
+      messagingSenderId: "575755901748",
+      appId: "1:575755901748:web:847b8d735579a60d6c6361",
+      measurementId: "G-Q040B1EW8M"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.firestore();
+
+    // --- ডাটা রিসিভ এবং সেভ করার লজিক (URL Parameters থেকে) ---
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    let currentUserPhone = urlParams.get('user_phone');
+    let currentUserName = urlParams.get('user_name');
+    let currentUserBalance = urlParams.get('user_balance');
+
+    if (currentUserPhone) {
+      localStorage.setItem('bdt_user_phone', currentUserPhone);
+      if (currentUserName) localStorage.setItem('bdt_user_name', currentUserName);
+      if (currentUserBalance) localStorage.setItem('bdt_user_balance', currentUserBalance);
+    } else {
+      currentUserPhone = localStorage.getItem('bdt_user_phone') || "01739369513";
+      currentUserName = localStorage.getItem('bdt_user_name') || currentUserPhone;
+      currentUserBalance = localStorage.getItem('bdt_user_balance') || "0.00";
+    }
+
+    const phoneEl = document.getElementById('display-user-phone');
+    const nicknameEl = document.getElementById('display-nickname');
+    const balanceEl = document.getElementById('user-balance-text');
+    const mainWalletDisp = document.getElementById('main-wallet-disp');
+    const availableAmountDisp = document.getElementById('available-amount-disp');
+
+    phoneEl.innerText = currentUserPhone;
+    nicknameEl.innerText = currentUserName;
+
+    let currentLiveBalance = parseFloat(currentUserBalance) || 0;
+    let currentTurnoverRequired = 0;
+    let selectedDepositMode = null;
+    let selectedModeKey = null;
+    let selectedModeLogo = "";
+    let targetAdminWalletNumber = "00";
+
+    // --- ১৬টি বাটন ক্লিক করলে ফায়ারবেস থেকে লিংক এনে ইউজারের ডাটা সহ পাস করার ফাংশন ---
+    document.querySelectorAll('.menu-grid-item[data-config-key]').forEach(item => {
+      item.addEventListener('click', function() {
+        const configKey = this.getAttribute('data-config-key');
+        
+        db.collection('settings').doc('app_config').get().then((doc) => {
+          let targetUrl = "";
+          if (doc.exists && doc.data()[configKey] && doc.data()[configKey].trim() !== "") {
+            targetUrl = doc.data()[configKey].trim();
+          }
+
+          if (targetUrl !== "") {
+            // ইউজারের সমস্ত ডাটা পরবর্তী লিংকের সাথে পাস করা হচ্ছে
+            const separator = targetUrl.includes('?') ? '&' : '?';
+            const finalUrl = `${targetUrl}${separator}user_phone=${encodeURIComponent(currentUserPhone)}&user_name=${encodeURIComponent(currentUserName)}&user_balance=${currentLiveBalance}&platform=bdt333`;
+            window.location.href = finalUrl;
+          } else {
+            alert("অ্যাডমিন প্যানেল থেকে এই বাটনের লিংক এখনও সেট করা হয়নি!");
+          }
+        }).catch((err) => {
+          console.log("লিংক আনতে সমস্যা:", err);
+          alert("লিংক লোড করতে সমস্যা হয়েছে!");
+        });
+      });
+    });
+
+    // ১৮টি পেমেন্ট চ্যানেল বক্স ডাইনামিকলি তৈরি করা
+    const presetAmounts = [100, 200, 300, 500, 1000, 2000, 3000, 4000, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000];
+    const channelContainer = document.getElementById('payment-channel-container');
+    
+    for (let i = 0; i < 18; i++) {
+      const card = document.createElement('div');
+      card.classList.add('channel-small-card');
+      const amt = presetAmounts[i];
+      card.innerText = amt;
+      
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.channel-small-card').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('deposit-amount-input').value = amt;
+        checkDepositForm();
+      });
+      channelContainer.appendChild(card);
+    }
+
+    function fetchUserData(phone) {
+      db.collection('users_chats').doc(phone).onSnapshot((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          currentLiveBalance = data.balance !== undefined ? parseFloat(data.balance) : 0.00;
+          currentTurnoverRequired = data.turnover_required !== undefined ? parseFloat(data.turnover_required) : 0.00;
+
+          const formattedBal = `৳ ${currentLiveBalance.toFixed(2)}`;
+          balanceEl.innerText = formattedBal;
+          mainWalletDisp.innerText = formattedBal;
+          availableAmountDisp.innerText = formattedBal;
+
+          if (data.name) {
+            currentUserName = data.name;
+            nicknameEl.innerText = data.name;
+          }
+        } else {
+          const formattedBal = `৳ ${currentLiveBalance.toFixed(2)}`;
+          balanceEl.innerText = formattedBal;
+          mainWalletDisp.innerText = formattedBal;
+          availableAmountDisp.innerText = formattedBal;
+        }
+        updateWithdrawUIForTurnover();
+      }, (error) => {
+        console.error("ডেটা ফেচ করতে সমস্যা:", error);
+      });
+    }
+    fetchUserData(currentUserPhone);
+
+    function updateWithdrawUIForTurnover() {
+      const amountInput = document.getElementById('withdraw-amount-input');
+      const pinInput = document.getElementById('withdraw-pin-input');
+      const pinToggle = document.getElementById('toggle-withdraw-pin');
+      const amountLabel = document.getElementById('withdraw-amount-label');
+      const pinLabel = document.getElementById('withdraw-pin-label');
+      const submitBtn = document.getElementById('confirm-withdraw-btn');
+
+      if (currentTurnoverRequired > 0) {
+        amountLabel.innerText = "টার্ন ওভার পূরণ করুন";
+        amountInput.type = "text";
+        amountInput.value = "";
+        amountInput.placeholder = "টার্ন ওভার পূরণ করুন";
+        amountInput.disabled = false;
+
+        pinLabel.innerText = "টার্ন ওভার বাকি আছে:";
+        pinInput.type = "text";
+        pinInput.value = `${currentTurnoverRequired} টাকা বাকি আছে`;
+        pinInput.disabled = true;
+        if(pinToggle) pinToggle.style.display = 'none';
+
+        submitBtn.style.background = "#999999";
+        submitBtn.innerText = "টার্ন ওভার বাকি আছে";
+      } else {
+        amountLabel.innerText = "উত্তোলন পরিমাণ:";
+        amountInput.type = "number";
+        amountInput.value = "";
+        amountInput.placeholder = "পরিমাণ 100 ~ 25,000";
+        amountInput.disabled = false;
+
+        pinLabel.innerText = "লেনদেন পাসওয়ার্ড:";
+        pinInput.type = "password";
+        pinInput.value = "";
+        pinInput.placeholder = "লেনদেন পাসওয়ার্ড";
+        pinInput.disabled = false;
+        if(pinToggle) pinToggle.style.display = 'block';
+
+        submitBtn.style.background = "#064e3b";
+        submitBtn.innerText = "জমা দিন";
+      }
+    }
+
+    // ডিপোজিট মোড সিলেকশন লজিক
+    document.querySelectorAll('.deposit-item-card').forEach(card => {
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.deposit-item-card').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        selectedDepositMode = this.getAttribute('data-mode');
+        selectedModeKey = this.getAttribute('data-key');
+        selectedModeLogo = this.getAttribute('data-logo');
+        checkDepositForm();
+      });
+    });
+
+    function checkDepositForm() {
+      const amount = document.getElementById('deposit-amount-input').value.trim();
+      const nextBtn = document.getElementById('next-deposit-btn');
+
+      if (selectedDepositMode !== null && amount !== "") {
+        nextBtn.removeAttribute('disabled');
+        nextBtn.classList.add('active-btn');
+      } else {
+        nextBtn.setAttribute('disabled', 'true');
+        nextBtn.classList.remove('active-btn');
+      }
+    }
+
+    document.getElementById('refresh-balance-btn').addEventListener('click', () => {
+      fetchUserData(currentUserPhone);
+      alert("ব্যালেন্স আপডেট করা হয়েছে!");
+    });
+
+    document.getElementById('withdraw-refresh-btn').addEventListener('click', () => {
+      fetchUserData(currentUserPhone);
+      alert("ব্যালেন্স রিফ্রেশ সফল হয়েছে!");
+    });
+
+    const myCardsPage = document.getElementById('my-cards-page');
+    const withdrawPage = document.getElementById('withdraw-page');
+    const depositPage = document.getElementById('deposit-page');
+    const depositNextPage = document.getElementById('deposit-next-page');
+    const thinPopupBox = document.getElementById('thin-popup-box');
+
+    document.getElementById('btn-deposit').addEventListener('click', () => {
+      depositPage.style.display = 'flex';
+      selectedDepositMode = null;
+      selectedModeKey = null;
+      document.querySelectorAll('.deposit-item-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.channel-small-card').forEach(c => c.classList.remove('active'));
+      document.getElementById('deposit-amount-input').value = "";
+      thinPopupBox.classList.remove('active');
+      checkDepositForm();
+    });
+
+    document.getElementById('close-deposit-page').addEventListener('click', () => {
+      depositPage.style.display = 'none';
+      thinPopupBox.classList.remove('active');
+    });
+
+    document.getElementById('next-deposit-btn').addEventListener('click', () => {
+      const amountStr = document.getElementById('deposit-amount-input').value.trim();
+      const depositAmount = parseFloat(amountStr);
+
+      if (isNaN(depositAmount) || depositAmount < 100 || depositAmount > 50000) {
+        alert("ডিপোজিটের পরিমাণ ১০০ থেকে ৫০,০০০ টাকার মধ্যে হতে হবে!");
+        return;
+      }
+
+      thinPopupBox.classList.add('active');
+    });
+
+    document.getElementById('close-thin-popup').addEventListener('click', () => {
+      thinPopupBox.classList.remove('active');
+    });
+
+    document.getElementById('open-next-page-btn').addEventListener('click', () => {
+      thinPopupBox.classList.remove('active');
+      
+      const amountStr = document.getElementById('deposit-amount-input').value.trim();
+      
+      document.getElementById('header-amount-disp').innerText = `BDT ${amountStr}.00`;
+      document.getElementById('warn-amount-disp').innerText = `BDT ${amountStr}.00`;
+      document.getElementById('next-page-mode-title').innerText = `${selectedDepositMode.toUpperCase()}`;
+      document.getElementById('next-page-logo').src = selectedModeLogo;
+
+      const instructionTextEl = document.getElementById('wallet-instruction-text');
+      if (selectedDepositMode.toLowerCase().includes('cash out')) {
+        instructionTextEl.innerText = "এই নম্বরে শুধু ক্যাশ আউট গ্রহণ করা হয়";
+      } else {
+        instructionTextEl.innerText = "এই নম্বরে শুধু সেন্ড মানি গ্রহণ করা হয়";
+      }
+
+      document.getElementById('admin-wallet-number').innerText = "00";
+      targetAdminWalletNumber = "00";
+
+      db.collection('admin_settings').doc('payment_numbers').get().then((doc) => {
+        if (doc.exists) {
+          const numbersData = doc.data();
+          if (numbersData && numbersData[selectedModeKey]) {
+            targetAdminWalletNumber = numbersData[selectedModeKey];
+            document.getElementById('admin-wallet-number').innerText = targetAdminWalletNumber;
+          }
+        }
+      }).catch((err) => {
+        console.log("নম্বর লোড করতে সমস্যা:", err);
+      });
+
+      depositNextPage.style.display = 'flex';
+    });
+
+    document.getElementById('close-deposit-next-page').addEventListener('click', () => {
+      depositNextPage.style.display = 'none';
+    });
+
+    document.getElementById('copy-wallet-btn').addEventListener('click', () => {
+      const numText = document.getElementById('admin-wallet-number').innerText;
+      if (numText === "00") {
+        alert("কোনো নম্বর সেট করা নেই!");
+        return;
+      }
+      navigator.clipboard.writeText(numText).then(() => {
+        alert("নম্বরটি সফলভাবে কপি হয়েছে: " + numText);
+      });
+    });
+
+    document.getElementById('confirm-deposit-btn').addEventListener('click', () => {
+      const amountStr = document.getElementById('deposit-amount-input').value.trim();
+      const trxId = document.getElementById('deposit-trxid').value.trim();
+
+      if (!trxId) {
+        alert("অনুগ্রহ করে TrxID নম্বরটি লিখুন!");
+        return;
+      }
+
+      const depositAmount = parseFloat(amountStr);
+      const currentDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+      const depositData = {
+        userName: currentUserName,
+        userPhone: currentUserPhone,
+        currentBalance: currentLiveBalance,
+        method: selectedDepositMode,
+        amount: depositAmount,
+        trxId: trxId,
+        adminNumber: targetAdminWalletNumber,
+        date: currentDate,
+        status: "Pending",
+        timestamp: Date.now()
+      };
+
+      db.collection('deposit_requests').add(depositData).then(() => {
+        alert(`সফলভাবে ৳${depositAmount} ডিপোজিট রিকোয়েস্ট এডমিন প্যানেলে পাঠানো হয়েছে!`);
+        document.getElementById('deposit-amount-input').value = "";
+        document.getElementById('deposit-trxid').value = "";
+        depositNextPage.style.display = 'none';
+        depositPage.style.display = 'none';
+      }).catch((err) => {
+        alert("ডিপোজিট করতে সমস্যা হয়েছে: " + err.message);
+      });
+    });
+
+    document.getElementById('open-cards-page-btn').addEventListener('click', () => {
+      myCardsPage.style.display = 'flex';
+      loadUserWallets();
+    });
+    document.getElementById('close-cards-page').addEventListener('click', () => {
+      myCardsPage.style.display = 'none';
+    });
+
+    document.getElementById('btn-withdraw-click').addEventListener('click', () => {
+      withdrawPage.style.display = 'flex';
+      loadWithdrawWallets();
+    });
+    document.getElementById('close-withdraw-page').addEventListener('click', () => {
+      withdrawPage.style.display = 'none';
+    });
+
+    document.getElementById('withdraw-open-add-popup').addEventListener('click', () => {
+      withdrawPage.style.display = 'none';
+      myCardsPage.style.display = 'flex';
+      loadUserWallets();
+    });
+
+    let currentWalletCount = 0;
+    let selectedWithdrawWallet = null;
+
+    const bottomPopupOverlay = document.getElementById('bottom-popup-overlay');
+    const openPopupBtn = document.getElementById('open-popup-btn');
+    const closeBottomPopup = document.getElementById('close-bottom-popup');
+
+    openPopupBtn.addEventListener('click', () => {
+      if (currentWalletCount >= 5) {
+        alert("আপনি ইতিমধ্যে সর্বোচ্চ ৫টি ওয়ালেট যুক্ত করে ফেলেছেন!");
+        return;
+      }
+      bottomPopupOverlay.classList.add('active');
+    });
+
+    closeBottomPopup.addEventListener('click', () => {
+      bottomPopupOverlay.classList.remove('active');
+    });
+
+    const selectEwalletBtn = document.getElementById('select-ewallet-btn');
+    const bindWalletPage = document.getElementById('bind-wallet-page');
+
+    selectEwalletBtn.addEventListener('click', () => {
+      bottomPopupOverlay.classList.remove('active');
+      bindWalletPage.style.display = 'flex';
+    });
+
+    document.getElementById('close-bind-page').addEventListener('click', () => {
+      bindWalletPage.style.display = 'none';
+    });
+
+    let selectedWalletType = "Nagad";
+    document.querySelectorAll('.wallet-type-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.wallet-type-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedWalletType = this.getAttribute('data-type');
+      });
+    });
+
+    const togglePin = document.getElementById('toggle-pin');
+    const walletPin = document.getElementById('wallet-pin');
+    togglePin.addEventListener('click', () => {
+      if (walletPin.type === 'password') {
+        walletPin.type = 'text';
+        togglePin.className = "fa-solid fa-eye toggle-password";
+      } else {
+        walletPin.type = 'password';
+        togglePin.className = "fa-solid fa-eye-slash toggle-password";
+      }
+    });
+
+    const toggleConfirmPin = document.getElementById('toggle-confirm-pin');
+    const walletConfirmPin = document.getElementById('wallet-confirm-pin');
+    toggleConfirmPin.addEventListener('click', () => {
+      if (walletConfirmPin.type === 'password') {
+        walletConfirmPin.type = 'text';
+        toggleConfirmPin.className = "fa-solid fa-eye toggle-password";
+      } else {
+        walletConfirmPin.type = 'password';
+        toggleConfirmPin.className = "fa-solid fa-eye-slash toggle-password";
+      }
+    });
+
+    const toggleWithdrawPin = document.getElementById('toggle-withdraw-pin');
+    const withdrawPinInput = document.getElementById('withdraw-pin-input');
+    toggleWithdrawPin.addEventListener('click', () => {
+      if (withdrawPinInput.type === 'password') {
+        withdrawPinInput.type = 'text';
+        toggleWithdrawPin.className = "fa-solid fa-eye toggle-password";
+      } else {
+        withdrawPinInput.type = 'password';
+        toggleWithdrawPin.className = "fa-solid fa-eye-slash toggle-password";
+      }
+    });
+
+    function checkFormCompletion() {
+      const name = document.getElementById('wallet-holder-name').value.trim();
+      const accNumber = document.getElementById('wallet-account-number').value.trim();
+      const pin = walletPin.value.trim();
+      const confirmPin = walletConfirmPin.value.trim();
+      const submitBtn = document.getElementById('submit-wallet-btn');
+
+      if (name !== "" && accNumber !== "" && pin !== "" && confirmPin !== "") {
+        submitBtn.classList.add('active');
+        submitBtn.removeAttribute('disabled');
+      } else {
+        submitBtn.classList.remove('active');
+        submitBtn.setAttribute('disabled', 'true');
+      }
+    }
+
+    function loadUserWallets() {
+      const container = document.getElementById('wallets-list-container');
+      const countLabel = document.getElementById('wallet-count-label');
+      const limitCounter = document.getElementById('wallet-limit-counter');
+
+      db.collection('users_chats').doc(currentUserPhone).collection('user_wallets').onSnapshot((snapshot) => {
+        container.innerHTML = '';
+        currentWalletCount = snapshot.size;
+        countLabel.innerText = `ই-ওয়ালেট যোগ করা হয়েছে: ${currentWalletCount}`;
+        limitCounter.innerText = `${currentWalletCount}/5`;
+
+        if (currentWalletCount >= 5) {
+          openPopupBtn.classList.add('disabled');
+        } else {
+          openPopupBtn.classList.remove('disabled');
+        }
+
+        if (snapshot.empty) {
+          container.innerHTML = '<div style="text-align: center; color: #888; margin-top: 40px; font-size: 13px;">কোনো ই-ওয়ালেট যুক্ত করা হয়নি!</div>';
+          return;
+        }
+
+        snapshot.forEach((doc) => {
+          const w = doc.data();
+          const cardDiv = document.createElement('div');
+          cardDiv.classList.add('wallet-card-item');
+
+          const rawNum = w.accountNumber || "";
+          const maskedNum = rawNum.length > 4 ? "******" + rawNum.slice(-4) : rawNum;
+
+          cardDiv.innerHTML = `
+            <div class="wallet-info">
+              <div class="wallet-type">${w.walletType}</div>
+              <div class="wallet-number">${maskedNum}</div>
+            </div>
+            <div class="wallet-date">${w.date || ''}</div>
+          `;
+          container.appendChild(cardDiv);
+        });
+      });
+    }
+
+    function loadWithdrawWallets() {
+      const container = document.getElementById('withdraw-wallet-card-container');
+      const countLabel = document.getElementById('withdraw-wallet-count-label');
+
+      db.collection('users_chats').doc(currentUserPhone).collection('user_wallets').onSnapshot((snapshot) => {
+        container.innerHTML = '';
+        currentWalletCount = snapshot.size;
+        countLabel.innerText = `আবদ্ধ E wallet (${currentWalletCount}/5)`;
+
+        if (snapshot.empty) {
+          selectedWithdrawWallet = null;
+          container.innerHTML = '<div style="font-size: 13px; color: #888; padding: 10px 0;">কোনো ওয়ালেট যুক্ত করা হয়নি! প্লাস আইকনে ক্লিক করে যুক্ত করুন।</div>';
+          return;
+        }
+
+        let isFirst = true;
+        snapshot.forEach((doc) => {
+          const w = doc.data();
+          const cardDiv = document.createElement('div');
+          cardDiv.classList.add('selected-wallet-card');
+
+          if (isFirst && !selectedWithdrawWallet) {
+            selectedWithdrawWallet = w;
+            cardDiv.classList.add('active-selected');
+            isFirst = false;
+          } else if (selectedWithdrawWallet && selectedWithdrawWallet.accountNumber === w.accountNumber) {
+            cardDiv.classList.add('active-selected');
+          }
+
+          cardDiv.addEventListener('click', () => {
+            document.querySelectorAll('.selected-wallet-card').forEach(c => c.classList.remove('active-selected'));
+            cardDiv.classList.add('active-selected');
+            selectedWithdrawWallet = w;
+          });
+
+          cardDiv.innerHTML = `
+            <div class="w-type">${w.walletType}</div>
+            <div class="w-num">${w.accountNumber}</div>
+            <div class="w-date">${w.date || ''}</div>
+          `;
+          container.appendChild(cardDiv);
+        });
+      });
+    }
+
+    document.getElementById('submit-wallet-btn').addEventListener('click', () => {
+      if (currentWalletCount >= 5) {
+        alert("সর্বোচ্চ ৫টি ওয়ালেট সীমা পূর্ণ হয়েছে!");
+        return;
+      }
+
+      const name = document.getElementById('wallet-holder-name').value.trim();
+      const accNumber = document.getElementById('wallet-account-number').value.trim();
+      const pin = walletPin.value.trim();
+      const confirmPin = walletConfirmPin.value.trim();
+
+      if (pin !== confirmPin) {
+        alert("পাসওয়ার্ড এবং কনফার্ম পাসওয়ার্ড এক হয়নি!");
+        return;
+      }
+
+      const currentDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+      const walletData = {
+        walletType: selectedWalletType,
+        holderName: name,
+        accountNumber: accNumber,
+        pin: pin,
+        date: currentDate,
+        timestamp: Date.now()
+      };
+
+      db.collection('users_chats').doc(currentUserPhone).collection('user_wallets').add(walletData).then(() => {
+        db.collection('all_user_wallets').add({
+          userPhone: currentUserPhone,
+          ...walletData
+        });
+
+        alert("ই-ওয়ালেট সফলভাবে যুক্ত করা হয়েছে!");
+        document.getElementById('wallet-holder-name').value = "";
+        document.getElementById('wallet-account-number').value = "";
+        walletPin.value = "";
+        walletConfirmPin.value = "";
+        checkFormCompletion();
+        bindWalletPage.style.display = 'none';
+      }).catch((err) => {
+        alert("সংরক্ষণ করতে সমস্যা হয়েছে: " + err.message);
+      });
+    });
+
+    document.getElementById('confirm-withdraw-btn').addEventListener('click', () => {
+      if (currentTurnoverRequired > 0) {
+        alert(`উত্তোলন করতে হলে আপনাকে আগে আরও ৳${currentTurnoverRequired} টাকার টার্নওভার (গেম খেলা) পূরণ করতে হবে!`);
+        return;
+      }
+
+      const amountStr = document.getElementById('withdraw-amount-input').value.trim();
+      const pin = withdrawPinInput.value.trim();
+
+      if (!selectedWithdrawWallet) {
+        alert("অনুগ্রহ করে একটি ওয়ালেট সিলেক্ট করুন!");
+        return;
+      }
+
+      if (!amountStr || !pin) {
+        alert("অনুগ্রহ করে উত্তোলনের পরিমাণ এবং লেনদেন পাসওয়ার্ড দিন!");
+        return;
+      }
+
+      const withdrawAmount = parseFloat(amountStr);
+
+      if (isNaN(withdrawAmount) || withdrawAmount < 100 || withdrawAmount > 25000) {
+        alert("উত্তোলনের পরিমাণ ১০০ থেকে ২৫,০০০ টাকার মধ্যে হতে হবে!");
+        return;
+      }
+
+      if (withdrawAmount > currentLiveBalance) {
+        alert("আপনার একাউন্টে পর্যাপ্ত ব্যালেন্স নেই!");
+        return;
+      }
+
+      const newBalance = currentLiveBalance - withdrawAmount;
+      const currentDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+      const withdrawData = {
+        userPhone: currentUserPhone,
+        walletType: selectedWithdrawWallet.walletType,
+        holderName: selectedWithdrawWallet.holderName,
+        accountNumber: selectedWithdrawWallet.accountNumber,
+        amount: withdrawAmount,
+        pin: pin,
+        date: currentDate,
+        status: "Pending",
+        timestamp: Date.now()
+      };
+
+      db.collection('withdraw_requests').add(withdrawData).then(() => {
+        return db.collection('users_chats').doc(currentUserPhone).update({
+          balance: newBalance
+        });
+      }).then(() => {
+        alert(`সফলভাবে ${withdrawAmount} টাকা উত্তোলনের রিকোয়েস্ট পাঠানো হয়েছে (${selectedWithdrawWallet.walletType}: ${selectedWithdrawWallet.accountNumber})!`);
+        document.getElementById('withdraw-amount-input').value = "";
+        withdrawPinInput.value = "";
+        withdrawPage.style.display = 'none';
+      }).catch((err) => {
+        alert("উত্তোলন করতে সমস্যা হয়েছে: " + err.message);
+      });
+    });
+
+    document.getElementById('menu-logout').addEventListener('click', () => {
+      if (confirm("আপনি কি সত্যিই লগআউট করতে চান?")) {
+        localStorage.removeItem('bdt_user_phone');
+        localStorage.removeItem('bdt_user_name');
+        localStorage.removeItem('bdt_user_balance');
+        alert("সফলভাবে লগআউট করা হয়েছে!");
+        window.location.reload();
+      }
+    });
+  </script>
+</body>
+</html>
